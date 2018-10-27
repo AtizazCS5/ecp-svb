@@ -1,2 +1,1 @@
-# ecp-svb
-This is used to test the blockchain network for secure voting.
+This is the readme file for the Business Network Definition created in Playground

@@ -1,0 +1,54 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+namespace org.ecp.voting
+
+participant voter identified by voterID {
+  o String voterID
+  o String fullName
+}
+
+participant candidate identified by candidateID {
+  o String candidateID
+  o String fullName
+  o Boolean IndependentStatus
+  --> politicalParty party optional
+}
+
+asset ifVoted identified by voterID {
+  o String voterID
+  o Boolean votedOrNot
+}
+
+asset district identified by districtId {
+  o String districtId
+  o String districtName
+}
+
+participant politicalParty identified by politicalPartyId {
+  o String politicalPartyId
+  o String politicalPartyName
+}
+
+asset candidateVote identified by candidateVoteId {
+  o String candidateVoteId
+  o Integer totalVote
+  --> candidate candidateProfile
+  --> district candidateDistrict
+}
+
+transaction vote {
+  --> candidateVote candidateVoteAsset
+  --> ifVoted ifVotedAsset
+}
